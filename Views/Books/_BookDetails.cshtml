@@ -1,0 +1,10 @@
+@model Book
+<dl class="details">
+    <dt>Tác giả</dt><dd>@Model.Author</dd>
+    <dt>Thể loại</dt><dd><span class="badge">@Model.Genre</span></dd>
+    <dt>Nhà xuất bản</dt><dd>@(Model.Publisher ?? "Chưa cập nhật")</dd>
+    <dt>Năm xuất bản</dt><dd>@Model.PublishedYear</dd>
+    <dt>Giá bán</dt><dd>@Model.Price.ToString("N2", CultureInfo.GetCultureInfo("vi-VN")) ₫</dd>
+    <dt>Số lượng</dt><dd>@Model.Quantity</dd>
+    <dt>Mô tả</dt><dd class="description">@(Model.Description ?? "Chưa có mô tả.")</dd>
+</dl>

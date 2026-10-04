@@ -1,0 +1,11 @@
+@model Book
+@{ ViewData["Title"] = "Xóa sách"; }
+<div class="page-header"><div><p class="eyebrow">XÁC NHẬN THAO TÁC</p><h1>Xóa sách</h1></div></div>
+<section class="card form-card">
+    <div class="alert warning">Bạn có chắc muốn xóa sách <strong>@Model.Title</strong>?</div>
+    <div asp-validation-summary="All" class="validation" role="alert"></div>
+    <partial name="_BookDetails" model="Model" />
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="form-actions">
+        <button class="btn danger" type="submit">Xác nhận xóa</button><a class="btn light" asp-action="Index">Hủy</a>
+    </form>
+</section>

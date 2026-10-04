@@ -1,0 +1,15 @@
+@{ ViewData["Title"] = "Kiểm tra CSDL"; var connected = ViewData["Connected"] is true; }
+<div class="page-header"><div><p class="eyebrow">KIỂM TRA HỆ THỐNG</p><h1>Kết nối cơ sở dữ liệu</h1></div></div>
+<section class="card form-card">
+    @if (connected)
+    {
+        <div class="alert success">Kết nối thành công. Bảng Books hiện có @ViewData["Count"] đầu sách.</div>
+        <p>Ứng dụng đã đọc dữ liệu trực tiếp từ SQL Server.</p>
+    }
+    else
+    {
+        <div class="alert warning">Chưa đọc được bảng Books.</div>
+        <ol><li>Mở SSMS, kết nối <code>(localdb)\MSSQLLocalDB</code> bằng Windows Authentication.</li><li>Chạy file <code>Database/01_Create_BookManagementDB.sql</code>.</li><li>Kiểm tra database <code>BookManagementDB</code> và chuỗi kết nối trong <code>appsettings.json</code>.</li><li>Chạy SSMS và ứng dụng bằng cùng tài khoản Windows.</li></ol>
+    }
+    <div class="form-actions"><a class="btn primary" asp-action="Database">Kiểm tra lại</a><a class="btn light" asp-controller="Books" asp-action="Index">Danh sách sách</a></div>
+</section>

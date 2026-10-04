@@ -1,0 +1,7 @@
+@{ ViewData["Title"] = "Có lỗi xảy ra"; }
+<section class="card form-card">
+    <h1>Không hoàn thành được yêu cầu</h1>
+    <p>Hãy kiểm tra kết nối cơ sở dữ liệu và thử lại.</p>
+    <p class="muted">Mã yêu cầu: @Context.TraceIdentifier</p>
+    <a class="btn primary" asp-controller="Home" asp-action="Database">Kiểm tra CSDL</a>
+</section>
