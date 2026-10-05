@@ -1,5 +1,6 @@
 using System.Globalization;
 using BookManagement.Data;
+using BookManagement.Middlewares;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,21 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = new[] { inputCulture },
     RequestCultureProviders = new List<IRequestCultureProvider>()
 });
+// Đặt trước static files để ghi log cả request CSS và các request bị chặn.
+app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseStaticFiles();
 app.UseRouting();
+
+// URL theo đề bài, dùng lại BooksController và các View hiện có.
+app.MapControllerRoute(
+    name: "book-detail",
+    pattern: "Book/Detail/{id?}",
+    defaults: new { controller = "Books", action = "Details" });
+
+app.MapControllerRoute(
+    name: "book-alias",
+    pattern: "Book/{action=Index}/{id?}",
+    defaults: new { controller = "Books" });
+
 app.MapControllerRoute(name: "default", pattern: "{controller=Books}/{action=Index}/{id?}");
 app.Run();

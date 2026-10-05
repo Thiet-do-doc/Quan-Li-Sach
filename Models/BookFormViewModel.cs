@@ -31,7 +31,7 @@ public class BookFormViewModel
 
     [Display(Name = "Giá bán (VNĐ)")]
     [Required(ErrorMessage = "Vui lòng nhập giá bán.")]
-    [Range(typeof(decimal), "0", "999999999", ErrorMessage = "Giá bán phải từ 0 đến 999.999.999 VNĐ.")]
+    [Range(typeof(decimal), "0.01", "999999999", ErrorMessage = "Giá bán phải lớn hơn 0 và không vượt quá 999.999.999 VNĐ.")]
     [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Giá bán có tối đa 2 chữ số thập phân.")]
     public decimal? Price { get; set; }
 
@@ -46,9 +46,14 @@ public class BookFormViewModel
 
     public static BookFormViewModel FromBook(Book book) => new()
     {
-        Title = book.Title, Author = book.Author, Genre = book.Genre,
-        Publisher = book.Publisher, PublishedYear = book.PublishedYear,
-        Price = book.Price, Quantity = book.Quantity, Description = book.Description
+        Title = book.Title,
+        Author = book.Author,
+        Genre = book.Genre,
+        Publisher = book.Publisher,
+        PublishedYear = book.PublishedYear,
+        Price = book.Price,
+        Quantity = book.Quantity,
+        Description = book.Description
     };
 
     public void ApplyTo(Book book)
