@@ -135,10 +135,3 @@ SELECT Id, Title, Price, Quantity FROM dbo.Books WHERE Title = N'Demo MVC';
 | Giá nhập không hợp lệ | Nhập số thuần như 120000 hoặc 120000.50; không gõ dấu phân cách hàng nghìn |
 | HTTP 400 khi POST | Mở lại form từ ứng dụng để có anti-forgery token hợp lệ |
 
-## 10. Kịch bản thuyết trình
-
-Mở `KICH_BAN_GIAI_THICH.md`, làm theo thứ tự demo và đọc các câu trọng điểm. Không cần giải thích từng dòng CSS hoặc từng dòng HTML giống nhau.
-
-## 11. Giới hạn kiểm chứng
-
-Kết quả kiểm tra được ghi trong `KIEM_TRA.md`. LocalDB trên máy Windows của bạn cần được xác nhận bằng bước 8; không thể truy cập `(localdb)\MSSQLLocalDB` của bạn từ máy tạo bộ project này.
