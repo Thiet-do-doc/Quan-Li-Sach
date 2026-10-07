@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace BookManagement.Middlewares;
 
 public class RequestLoggingMiddleware
@@ -13,12 +11,7 @@ public class RequestLoggingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var timer = Stopwatch.StartNew();
-        var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-        var method = context.Request.Method;
         var path = context.Request.Path.ToString();
-
-        Console.WriteLine($"[{time}] Method: {method} - Path: {path}");
 
         if (IsInvalidBookId(path))
         {
@@ -26,14 +19,14 @@ public class RequestLoggingMiddleware
             context.Response.ContentType = "text/plain; charset=utf-8";
             await context.Response.WriteAsync("Book id không hợp lệ");
 
-            LogStatus(context, timer);
+            LogStatus(context);
             return; // Không gọi _next: request không vào Controller.
         }
 
         await _next(context);
 
         // Chạy khi middleware phía sau và Controller đã xử lý xong.
-        LogStatus(context, timer);
+        LogStatus(context);
     }
 
     private static bool IsInvalidBookId(string path)
@@ -51,11 +44,8 @@ public class RequestLoggingMiddleware
             && int.TryParse(parts[2], out var id) && id <= 0;
     }
 
-    private static void LogStatus(HttpContext context, Stopwatch timer)
+    private static void LogStatus(HttpContext context)
     {
-        timer.Stop();
-        Console.WriteLine($"Status Code: {context.Response.StatusCode}"
-            + $" - Method: {context.Request.Method} - Path: {context.Request.Path}"
-            + $" - Duration: {timer.Elapsed.TotalMilliseconds:F2} ms");
+        Console.WriteLine($"Status Code: {context.Response.StatusCode}");
     }
 }

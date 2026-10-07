@@ -1,4 +1,8 @@
 @model Book
+@if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+{
+    <img class="book-cover-detail" src="@Url.Content(Model.ImagePath)" alt="Bìa sách @Model.Title" />
+}
 <dl class="details">
     <dt>Tác giả</dt><dd>@Model.Author</dd>
     <dt>Thể loại</dt><dd><span class="badge">@Model.Genre</span></dd>

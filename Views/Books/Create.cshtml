@@ -1,9 +1,49 @@
 @model BookFormViewModel
-@{ ViewData["Title"] = "Thêm sách"; }
-<div class="page-header"><div><p class="eyebrow">BỔ SUNG THƯ VIỆN</p><h1>Thêm sách mới</h1><p class="muted">Nhập thông tin sách rồi bấm lưu.</p></div></div>
+
+@{
+    ViewData["Title"] = "Thêm sách";
+}
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">BỔ SUNG THƯ VIỆN</p>
+        <h1>Thêm sách mới</h1>
+        <p class="muted">Nhập thông tin sách rồi bấm lưu.</p>
+    </div>
+</div>
+
 <section class="card form-card">
-    <form asp-action="Create" method="post">
+
+    <form asp-action="Create"
+          method="post"
+          enctype="multipart/form-data">
+
         <partial name="_BookForm" model="Model" />
-        <div class="form-actions"><button type="submit" class="btn primary">Lưu sách</button><a class="btn light" asp-action="Index">Hủy</a></div>
+
+        <div class="form-group">
+            <label for="imageFile">Ảnh bìa sách</label>
+
+            <input type="file"
+                   id="imageFile"
+                   name="imageFile"
+                   accept=".jpg,.jpeg,.png,.gif,.webp"
+                   class="form-control" />
+
+            <span class="text-danger">
+                @Html.ValidationMessage("imageFile")
+            </span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn primary">
+                Lưu sách
+            </button>
+
+            <a class="btn light" asp-action="Index">
+                Hủy
+            </a>
+        </div>
+
     </form>
+
 </section>

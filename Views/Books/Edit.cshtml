@@ -2,8 +2,17 @@
 @{ ViewData["Title"] = "Sửa sách"; }
 <div class="page-header"><div><p class="eyebrow">CẬP NHẬT THÔNG TIN</p><h1>Sửa sách</h1><p class="muted">Chỉnh sửa thông tin và lưu thay đổi.</p></div></div>
 <section class="card form-card">
-    <form asp-action="Edit" asp-route-id="@ViewData["BookId"]" method="post">
+    <form asp-action="Edit" asp-route-id="@ViewData["BookId"]" method="post" enctype="multipart/form-data">
         <partial name="_BookForm" model="Model" />
+        @if (ViewData["ImagePath"] is string imagePath && !string.IsNullOrWhiteSpace(imagePath))
+        {
+            <img class="book-cover-detail" src="@Url.Content(imagePath)" alt="Ảnh bìa sách hiện tại" />
+        }
+        <div class="form-group">
+            <label for="imageFile">Ảnh bìa sách mới</label>
+            <input type="file" id="imageFile" name="imageFile" accept=".jpg,.jpeg,.png,.gif,.webp" class="form-control" />
+            <span class="validation">@Html.ValidationMessage("imageFile")</span>
+        </div>
         <div class="form-actions"><button type="submit" class="btn primary">Lưu thay đổi</button><a class="btn light" asp-action="Index">Hủy</a></div>
     </form>
 </section>
